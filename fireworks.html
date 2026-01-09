@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আতশবাজি ২০২৬ | NASHWA</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Montserrat:wght@300;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            overflow-x: hidden;
+            color: white;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        /* ক্যানভাসকে পেছনে ফিক্সড রাখার জন্য */
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* ক্যানভাস নিচে */
+            display: block;
+        }
+
+        /* কন্টেন্ট যেন ক্যানভাসের উপরে থাকে */
+        .firework-header, .main-footer, .text-overlay {
+            position: relative;
+            z-index: 10;
+        }
+
+        .text-overlay {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .text-overlay h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            color: #fbbf24;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+        }
+
+        /* হেডার স্টাইল আপনার ৩য় পেজের ডিমান্ড অনুযায়ী */
+        .firework-header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* সার্চ রেজাল্ট ড্রপডাউন */
+        .search-results-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 250px;
+            background: #1e293b;
+            border-radius: 8px;
+            display: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        
+        .result-item {
+            padding: 12px;
+            display: block;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid #334155;
+        }
+        .result-item:hover { background: #fbbf24; color: black; }
+    </style>
+</head>
+<body>
+
+    <header class="firework-header">
+        <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <div class="logo-area">
+                <div class="logo-text" style="font-size: 24px; font-weight: bold; color: #fbbf24;">NASHWA</div>
+            </div>
+
+            <div class="nav-links">
+                <a href="hadi.html" class="back-home" style="color: white; text-decoration: none; background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px;">হোম</a>
+            </div>
+
+            <div class="search-area" style="position: relative;">
+                <div class="search-box" style="display: flex; background: rgba(255,255,255,0.1); border-radius: 20px; padding: 5px 12px; border: 1px solid #fbbf24;">
+                    <input type="text" id="searchInput" placeholder="খুঁজুন..." onkeyup="searchPage()" style="background: transparent; border: none; color: white; outline: none;">
+                </div>
+                <div id="search-results" class="search-results-dropdown"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="text-overlay">
+            <h1>HAPPY NEW YEAR 2026</h1>
+            <p style="font-size: 20px; color: #cbd5e1; margin-top: 10px;">নতুন বছরে ইনসাফ কায়েম হোক</p>
+        </div>
+        <canvas id="canvas"></canvas>
+    </main>
+
+    <footer class="main-footer" style="background: #0f172a; color: #cbd5e1; padding: 50px 5% 20px; border-top: 1px solid #1e293b;">
+        <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+            <div class="footer-section about">
+                <h3 style="color: #fbbf24; margin-bottom: 15px;">NASHWA</h3>
+                <p>একটি আধুনিক ডিজিটাল প্ল্যাটফর্ম যেখানে আমরা আমাদের ইতিহাস এবং স্মৃতিকে ধরে রাখার চেষ্টা করি।</p>
+            </div>
+            <div class="footer-section links">
+                <h4 style="color: #fbbf24; margin-bottom: 15px;">দ্রুত লিঙ্ক</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 8px;"><a href="index.html" style="color: #cbd5e1; text-decoration: none;">হোম</a></li>
+                    <li style="margin-bottom: 8px;"><a href="details_hadi.html" style="color: #cbd5e1; text-decoration: none;">স্মৃতিতে ওসমান হাদি</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h4 style="color: #fbbf24; margin-bottom: 15px;">যোগাযোগ</h4>
+                <p>ইমেইল: info@nashwa.com</p>
+                <div class="socials" style="margin-top: 10px;">
+                    <a href="#" style="color: #fbbf24; text-decoration: none;">Facebook</a> | <a href="#" style="color: #fbbf24; text-decoration: none;">YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #1e293b; font-size: 14px;">
+            &copy; ২০২৬ NASHWA | সর্বস্বত্ব সংরক্ষিত
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // ফায়ারওয়ার্কস ক্লাস লজিক (আপনার আগের কোড)
+        class Firework {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height;
+                this.sx = Math.random() * 3 - 1.5;
+                this.sy = Math.random() * -4 - 8;
+                this.size = 2;
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                this.exploded = false;
+            }
+            update() {
+                if (!this.exploded) {
+                    this.x += this.sx; this.y += this.sy; this.sy += 0.1;
+                    if (this.sy >= 0) { this.exploded = true; this.createParticles(); }
+                }
+            }
+            draw() {
+                if (!this.exploded) {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+                }
+            }
+            createParticles() {
+                for (let i = 0; i < 50; i++) { particles.push(new Particle(this.x, this.y, this.color)); }
+            }
+        }
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x; this.y = y; this.color = color;
+                this.angle = Math.random() * Math.PI * 2;
+                this.speed = Math.random() * 6 + 2;
+                this.friction = 0.95; this.gravity = 0.1; this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.015;
+            }
+            update() { this.speed *= this.friction; this.x += Math.cos(this.angle) * this.speed; this.y += Math.sin(this.angle) * this.speed + this.gravity; this.alpha -= this.decay; }
+            draw() { ctx.globalAlpha = this.alpha; ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, 2, 0, Math.PI * 2); ctx.fill(); }
+        }
+
+        let fireworks = [];
+        let particles = [];
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            if (Math.random() < 0.05) fireworks.push(new Firework());
+            fireworks.forEach((fw, i) => { fw.update(); fw.draw(); if (fw.exploded) fireworks.splice(i, 1); });
+            particles.forEach((p, i) => { p.update(); p.draw(); if (p.alpha <= 0) particles.splice(i, 1); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // সার্চ ফাংশন
+        function searchPage() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let resultsDiv = document.getElementById('search-results');
+            resultsDiv.innerHTML = '';
+            if (input.length < 1) { resultsDiv.style.display = 'none'; return; }
+            const pages = [
+                { title: 'হোম পেজ', url: 'index.html' },
+                { title: 'স্মৃতিতে ওসমান হাদি', url: 'details_hadi.html' }
+            ];
+            let filtered = pages.filter(p => p.title.toLowerCase().includes(input));
+            if (filtered.length > 0) {
+                resultsDiv.style.display = 'block';
+                filtered.forEach(p => {
+                    let a = document.createElement('a'); a.href = p.url; a.className = 'result-item'; a.innerText = p.title; resultsDiv.appendChild(a);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

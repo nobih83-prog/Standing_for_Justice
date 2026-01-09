@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASHWA | Justice Countdown</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Montserrat:wght@300;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo-area">
+                <a href="hadi.html">
+                    <img src="logo.jpeg" alt="NASHWA Logo" class="main-logo-img">
+                </a>
+            </div>
+
+            <div class="nav-links">
+                <a href="hadi.html">হোম</a>
+                <a href="fireworks.html">নববর্ষ ২০২৬</a>
+                <a href="details_hadi.html">স্মৃতিতে ওসমান হাদি</a>
+                <a href="hadi.html">যোগাযোগ</a>
+            </div>
+
+            <div class="search-area">
+                <form class="search-box" action="#">
+                    <input type="text" placeholder="খুঁজুন...">
+                    <button type="submit" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="countdown-section">
+            <div class="timer-container">
+                <div class="timer-header">
+                    <span class="scale-icon">⚖️</span>
+                    <h3 class="demand-text">সুষ্ঠু বিচারের দাবি</h3>
+                </div>
+                <h2 class="main-title">শহীদ ওসমান হাদি হত্যার বিচারহীনতার সময়কাল</h2>
+
+                <div id="countdown" class="countdown-wrapper">
+                    <div class="time-block">
+                        <span class="number" id="days">০০</span>
+                        <span class="label">দিন</span>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="time-block">
+                        <span class="number" id="hours">০০</span>
+                        <span class="label">ঘণ্টা</span>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="time-block">
+                        <span class="number" id="minutes">০০</span>
+                        <span class="label">মিনিট</span>
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="time-block">
+                        <span class="number red" id="seconds">০০</span>
+                        <span class="label">সেকেন্ড</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.jpeg" alt="NASHWA Logo" class="main-logo-img">
+            </div>
+            <p>&copy; 2025 NASHWA Design Studio. Standing for Justice.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
